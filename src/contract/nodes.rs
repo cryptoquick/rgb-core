@@ -137,6 +137,12 @@ impl FromStr for NodeId {
     fn from_str(s: &str) -> Result<Self, Self::Err> { Ok(NodeId::from_inner(s.parse()?)) }
 }
 
+impl From<ContractId> for NodeId {
+    fn from(contract_id: ContractId) -> Self {
+        NodeId::from_inner(contract_id.into_inner())
+    }
+}
+
 /// Unique contract identifier equivalent to the contract genesis commitment
 #[derive(Wrapper, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Display, From)]
 #[wrapper(Debug, BorrowSlice)]
